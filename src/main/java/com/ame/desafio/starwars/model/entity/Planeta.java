@@ -1,29 +1,48 @@
-package com.ame.desafio.starwars.model;
+package com.ame.desafio.starwars.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
+@Entity
+@Table(name = "Planeta")
 public class Planeta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+    private Long id;
+    @Column(name = "Nome", nullable = false)
     private String nome;
-    @Column
+    @Column(name = "Clima", nullable = false)
     private String clima;
-    @Column
+    @Column(name = "Terreno", nullable = false)
     private String terreno;
-    @Column
+    @Column(name = "Aparicoes_Filme", nullable = false)
     private int aparicoesFilmes;
+
+    public Planeta() {}
 
     public Planeta(String nome, String clima, String terreno) {
         this.nome = nome;
         this.clima = clima;
         this.terreno = terreno;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planeta planeta = (Planeta) o;
+        return id == planeta.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public String getNome() {
         return nome;
