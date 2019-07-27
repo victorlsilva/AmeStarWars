@@ -1,19 +1,18 @@
-package com.ame.desafio.starwars.service;
+package com.ame.desafio.starwars.service.impl;
 
 import com.ame.desafio.starwars.model.entity.Planeta;
 import com.ame.desafio.starwars.model.repository.PlanetaRepository;
+import com.ame.desafio.starwars.service.PlanetasService;
 import com.google.common.collect.Lists;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-@Service
-public class PlanetaService {
+public class PlanetaServiceImpl implements PlanetasService {
 
 	@Autowired
 	private PlanetaRepository planetaRepository;
