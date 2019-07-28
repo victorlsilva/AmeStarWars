@@ -10,13 +10,13 @@ public class Planeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "Nome", nullable = false)
+    @Column(name = "Nome", nullable = false, unique = true)
     private String nome;
     @Column(name = "Clima", nullable = false)
     private String clima;
     @Column(name = "Terreno", nullable = false)
     private String terreno;
-    @Column(name = "Aparicoes_Filme", nullable = false)
+    @Column(name = "Aparicoes_Filme")
     private int aparicoesFilmes;
 
     public Planeta() {}

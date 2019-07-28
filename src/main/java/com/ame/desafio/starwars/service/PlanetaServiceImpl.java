@@ -1,24 +1,37 @@
-package com.ame.desafio.starwars.service.impl;
+package com.ame.desafio.starwars.service;
 
 import com.ame.desafio.starwars.model.entity.Planeta;
+import com.ame.desafio.starwars.model.entity.PlanetaDTO;
 import com.ame.desafio.starwars.model.repository.PlanetaRepository;
-import com.ame.desafio.starwars.service.PlanetasService;
 import com.google.common.collect.Lists;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
-public class PlanetaServiceImpl implements PlanetasService {
+@Service
+public class PlanetaServiceImpl implements PlanetaService {
 
 	@Autowired
 	private PlanetaRepository planetaRepository;
 
+	@Autowired
+	private PlanetaServiceIntegrationAccess planetaServiceIntegrationAccess;
+
 	public Planeta save(Planeta planeta){
+
+		PlanetaDTO planetaHelper;
+		planetaHelper = planetaServiceIntegrationAccess.searchByName(planeta.getNome());
+
+		if (planeta.getNome().equals(planetaHelper.getName())){
+			planeta.setAparicoesFilmes(planetaHelper.getQuantity_movies());
 			return planetaRepository.save(planeta);
+		} else{
+			return planetaRepository.save(planeta);
+		}
 	}
 
 	public List<Planeta> findAll() {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface PlanetasService {
+public interface PlanetaService {
 
     Planeta save(Planeta planeta);
 
@@ -17,6 +17,5 @@ public interface PlanetasService {
     Planeta findById(Long id);
 
     void delete(Long id);
-
 
 }

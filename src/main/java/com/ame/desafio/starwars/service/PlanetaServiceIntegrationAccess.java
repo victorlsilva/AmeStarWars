@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface PlanetasServiceIntegrationAccess {
+public interface PlanetaServiceIntegrationAccess {
 
     List<PlanetaDTO> searchAll();
 

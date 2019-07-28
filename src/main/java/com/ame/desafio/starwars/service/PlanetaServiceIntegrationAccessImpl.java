@@ -1,8 +1,7 @@
-package com.ame.desafio.starwars.service.impl;
+package com.ame.desafio.starwars.service;
 
 import com.ame.desafio.starwars.model.entity.PlanetaDTO;
 import com.ame.desafio.starwars.model.entity.SwapiTotalResponse;
-import com.ame.desafio.starwars.service.PlanetasServiceIntegrationAccess;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -12,8 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.List;
-
-public class PlanetaServiceIntegrationAccessImpl implements PlanetasServiceIntegrationAccess {
+@Service
+public class PlanetaServiceIntegrationAccessImpl implements PlanetaServiceIntegrationAccess {
 
     private RestTemplate restTemplate = new RestTemplate();
 
