@@ -38,7 +38,7 @@ public class PlanetaRestController {
 	@GetMapping(value = "/search",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public Planeta seachByName(@RequestParam(name = "name", required = true)String name){
+	public Planeta searchByName(@RequestParam(name = "name", required = true)String name){
 		return planetaService.findByName(name);
 	}
 

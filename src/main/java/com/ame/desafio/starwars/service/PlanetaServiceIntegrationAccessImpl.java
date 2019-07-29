@@ -2,12 +2,12 @@ package com.ame.desafio.starwars.service;
 
 import com.ame.desafio.starwars.model.entity.PlanetaDTO;
 import com.ame.desafio.starwars.model.entity.SwapiTotalResponse;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.ame.desafio.starwars.exceptions.ObjectNotFoundException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,7 @@ public class PlanetaServiceIntegrationAccessImpl implements PlanetaServiceIntegr
     public List<PlanetaDTO> searchAll() {
         ResponseEntity<SwapiTotalResponse> response = restTemplate.exchange(constructUri(), HttpMethod.GET, buildEntity(), SwapiTotalResponse.class);
         if (response.getBody().getResults().isEmpty()) {
-            throw new ObjectNotFoundException("findAll", "No Planet was found.");
+            throw new ObjectNotFoundException("No Planet was found.");
         }
 
         List<PlanetaDTO> planetas = response.getBody().getResults();
@@ -33,7 +33,7 @@ public class PlanetaServiceIntegrationAccessImpl implements PlanetaServiceIntegr
     public PlanetaDTO searchByName(String name) {
         ResponseEntity<SwapiTotalResponse> response = restTemplate.exchange(constructUriSearch("planets/?search=" + name), HttpMethod.GET, buildEntity(), SwapiTotalResponse.class);
         if (response.getBody().getResults().isEmpty()) {
-            throw new ObjectNotFoundException("findByName", "No Planet was found.");
+            throw new ObjectNotFoundException("No Planet was found.");
         }
         SwapiTotalResponse responseDTO = response.getBody();
 		return responseDTO.getResults().get(0);
