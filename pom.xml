@@ -14,6 +14,13 @@
     <name>starwars</name>
     <description>Projeto para o desafio tecnico para ingressar na empresa Ame</description>
 
+    <developers>
+        <developer>
+            <name>Victor Lopes da Silva</name>
+            <email>victorls1993@gmail.com</email>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -72,5 +79,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
