@@ -4,6 +4,7 @@ import com.ame.desafio.starwars.model.entity.Planeta;
 import com.ame.desafio.starwars.model.entity.PlanetaDTO;
 import com.ame.desafio.starwars.model.repository.PlanetaRepository;
 import com.google.common.collect.Lists;
+import com.ame.desafio.starwars.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ame.desafio.starwars.exceptions.ObjectNotFoundException;
@@ -21,15 +22,19 @@ public class PlanetaServiceImpl implements PlanetaService {
 	private PlanetaServiceIntegrationAccess planetaServiceIntegrationAccess;
 
 	public Planeta save(Planeta planeta){
+		PlanetaDTO planetaHelper = null;
+		try {
+			if (planeta != null)
+				planetaHelper = planetaServiceIntegrationAccess.searchByName(planeta.getNome());
 
-		PlanetaDTO planetaHelper;
-		planetaHelper = planetaServiceIntegrationAccess.searchByName(planeta.getNome());
-
-		if (planeta.getNome().equals(planetaHelper.getName())){
-			planeta.setAparicoesFilmes(planetaHelper.getQuantity_movies());
-			return planetaRepository.save(planeta);
-		} else{
-			return planetaRepository.save(planeta);
+			if (planetaHelper != null || planetaHelper.getQuantity_movies() != 0) {
+					planeta.setAparicoesFilmes(planetaHelper.getQuantity_movies());
+					return planetaRepository.save(planeta);
+			}else{
+				throw new DatabaseException("Erro ao salvar dados.");
+			}
+		}catch (Exception e){
+			throw new DatabaseException("Erro ao salvar dados.", e);
 		}
 	}
 

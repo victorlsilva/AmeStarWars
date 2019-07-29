@@ -1,5 +1,7 @@
 package com.ame.desafio.starwars.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ public class Planeta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
     @Column(name = "Nome", nullable = false, unique = true)
     private String nome;

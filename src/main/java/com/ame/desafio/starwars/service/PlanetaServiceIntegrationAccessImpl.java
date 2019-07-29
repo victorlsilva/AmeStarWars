@@ -31,12 +31,9 @@ public class PlanetaServiceIntegrationAccessImpl implements PlanetaServiceIntegr
     }
 
     public PlanetaDTO searchByName(String name) {
-        ResponseEntity<SwapiTotalResponse> response = restTemplate.exchange(constructUriSearch("planets/?search=" + name), HttpMethod.GET, buildEntity(), SwapiTotalResponse.class);
-        if (response.getBody().getResults().isEmpty()) {
-            throw new ObjectNotFoundException("No Planet was found.");
-        }
+        ResponseEntity<SwapiTotalResponse> response = restTemplate.exchange(constructUriSearch(name), HttpMethod.GET, buildEntity(), SwapiTotalResponse.class);
         SwapiTotalResponse responseDTO = response.getBody();
-		return responseDTO.getResults().get(0);
+        return responseDTO.getResults().get(0);
     }
 
     private String constructUriSearch(String name) {
@@ -46,6 +43,8 @@ public class PlanetaServiceIntegrationAccessImpl implements PlanetaServiceIntegr
                 .path("/api/planets")
                 .queryParam("search", name)
                 .build();
+
+        System.out.println(uri.toString());
 
         return uri.toString();
     }
